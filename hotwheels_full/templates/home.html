@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wheels Store</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #0f0f0f;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #111;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-family: 'Orbitron', sans-serif;
+            color: #ff3c3c;
+        }
+
+        .navbar a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .navbar a:hover {
+            color: #ff3c3c;
+        }
+
+        /* Hero */
+        .hero {
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #111, #1f1f1f);
+        }
+
+        .hero h1 {
+            letter-spacing: 3px;
+        }
+
+        /* Cards */
+        .card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 20px rgba(255,0,0,0.25);
+        }
+
+        .card img {
+            border-radius: 10px;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .btn-hot {
+            background: #ff3c3c;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .btn-hot:hover {
+            background: #cc0000;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .section {
+            margin-top: 60px;
+        }
+
+        /* Contact */
+        .contact-box {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            color: #aaa;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <div style="width:120px;"></div>
+
+        <h1 class="logo m-0">WHEELS STORE</h1>
+
+        <div>
+            <a href="/cart/" class="me-3">Cart</a>
+
+            {% if user.is_authenticated %}
+                <span class="me-3">👤 {{ user.username }}</span>
+                <a href="/logout/">Logout</a>
+            {% else %}
+                <a href="/login/" class="me-3">Login</a>
+                <a href="/register/">Register</a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>FAST. FIERCE. LEGENDARY.</h1>
+</div>
+
+<div class="container">
+
+    <!-- 🔥 FEATURED -->
+    <div class="section">
+        <h2 class="text-center">🔥 Featured Cars</h2>
+        <div class="row">
+            {% for p in products|slice:":4" %}
+            <div class="col-md-3 mb-4">
+                <div class="card p-2 text-center">
+
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" class="img-fluid">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x160" class="img-fluid">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5>{{ p.name }}</h5>
+                        <p>₹{{ p.price }}</p>
+                        <a href="/add/{{p.id}}/" class="btn btn-hot">Add to Cart</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 💎 PREMIUM -->
+    <div class="section">
+        <h2 class="text-center">💎 Premium Cars</h2>
+        <div class="row">
+            {% for p in products|slice:"4:8" %}
+            <div class="col-md-3 mb-4">
+                <div class="card p-2 text-center">
+
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" class="img-fluid">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x160" class="img-fluid">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5>{{ p.name }}</h5>
+                        <p>₹{{ p.price }}</p>
+                        <a href="/add/{{p.id}}/" class="btn btn-hot">Add to Cart</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 🏁 LIMITED -->
+    <div class="section">
+        <h2 class="text-center">🏁 Limited Collection</h2>
+        <div class="row">
+            {% for p in products|slice:"8:12" %}
+            <div class="col-md-3 mb-4">
+                <div class="card p-2 text-center">
+
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" class="img-fluid">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x160" class="img-fluid">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5>{{ p.name }}</h5>
+                        <p>₹{{ p.price }}</p>
+                        <a href="/add/{{p.id}}/" class="btn btn-hot">Add to Cart</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 📞 CONTACT -->
+    <div class="section">
+        <h2 class="text-center">Support & Contact</h2>
+        <div class="row text-center">
+
+            <div class="col-md-4">
+                <div class="contact-box">
+                    <p>Email</p>
+                    <p>support@wheelsstore.com</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="contact-box">
+                    <p>Phone</p>
+                    <p>+91 98765 43210</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="contact-box">
+                    <p>Stores</p>
+                    <p>Speed Hub, Toy World, Car Zone</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Wheels Store 🚗</p>
+</div>
+
+</body>
+</html>

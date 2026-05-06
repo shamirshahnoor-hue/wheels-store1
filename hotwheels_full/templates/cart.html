@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart - Wheels Store</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #0f0f0f;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ff3c3c;
+        }
+
+        .btn-hot {
+            background: #ff3c3c;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 8px 20px;
+        }
+
+        .btn-hot:hover {
+            background: #cc0000;
+        }
+
+        /* Cart Box */
+        .cart-box {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        /* Card */
+        .cart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .cart-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255,0,0,0.2);
+        }
+
+        /* Price */
+        .price {
+            color: #ff3c3c;
+            font-weight: 500;
+        }
+
+        /* Title */
+        .cart-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* Total */
+        .total-box {
+            text-align: right;
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Empty */
+        .empty-cart {
+            text-align: center;
+            margin-top: 60px;
+            color: #aaa;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #777;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar d-flex justify-content-between px-4">
+    <div class="logo">🔥 WHEELS STORE</div>
+    <a href="/" class="btn btn-hot">Continue Shopping</a>
+</nav>
+
+<!-- CART -->
+<div class="container cart-box">
+
+    <h2 class="cart-title">🛒 Your Cart</h2>
+
+    {% if items %}
+
+        {% for item in items %}
+        <div class="cart-card">
+            <div>
+                <h5>{{ item.product.name }}</h5>
+                <small>Quantity: {{ item.quantity }}</small>
+            </div>
+
+            <div class="price">
+                ₹{{ item.product.price }}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="total-box">
+            Total: ₹{{ total }}
+        </div>
+
+        <div class="text-end mt-4">
+            <a href="/checkout/" class="btn btn-hot">
+                Proceed to Checkout
+            </a>
+        </div>
+
+    {% else %}
+
+        <div class="empty-cart">
+            <h4>Your cart is empty 😔</h4>
+            <p>Add some cars to continue shopping</p>
+            <a href="/" class="btn btn-hot mt-3">Shop Now</a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Wheels Store 🚗</p>
+</div>
+
+</body>
+</html>
